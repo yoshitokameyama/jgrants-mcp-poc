@@ -1,0 +1,6 @@
+This repository adapts the sample implementation published by Japan's Digital
+Agency at https://github.com/digital-go-jp/jgrants-mcp-server.
+
+The upstream implementation and this adaptation are distributed under the MIT
+License. Jグランツ data is obtained from the public Jグランツ API and remains
+subject to its applicable terms of use.

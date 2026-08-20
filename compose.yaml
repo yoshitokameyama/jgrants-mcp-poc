@@ -1,0 +1,37 @@
+name: jgrants-mcp
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    environment:
+      MCP_AUTH_TOKEN: ${MCP_AUTH_TOKEN:?MCP_AUTH_TOKEN is required}
+      PORT: "8080"
+      UPSTREAM_URL: http://mcp-server:8000
+    ports:
+      - "8080:8080"
+    depends_on:
+      mcp-server:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [public, private]
+
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      JGRANTS_HOST: 0.0.0.0
+      JGRANTS_PATH: /mcp
+      JGRANTS_REQUIRE_AUTH: "1"
+      MCP_AUTH_TOKEN: ${MCP_AUTH_TOKEN:?MCP_AUTH_TOKEN is required}
+      PORT: "8000"
+    expose: ["8000"]
+    restart: unless-stopped
+    networks: [private]
+
+networks:
+  public:
+  private:
+    internal: true

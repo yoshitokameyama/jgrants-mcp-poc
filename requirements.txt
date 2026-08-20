@@ -1,0 +1,2 @@
+# Compatibility install path. Docker and CI use pyproject.toml + uv.lock.
+-e .

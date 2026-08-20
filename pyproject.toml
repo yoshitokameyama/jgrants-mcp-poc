@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "torchi-jgrants-mcp"
+version = "1.0.0"
+description = "Authenticated remote MCP server for the public jGrants API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = [
+  "fastmcp>=3.2,<4",
+  "httpx>=0.28,<1",
+  "markitdown[docx,pptx,xlsx]>=0.1.3,<0.2",
+  "pdfplumber>=0.11,<1",
+]
+
+[project.scripts]
+jgrants-mcp = "jgrants_mcp_server.core:main"
+
+[tool.setuptools.packages.find]
+include = ["jgrants_mcp_server*"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+  "pytest>=8,<10",
+  "pytest-asyncio>=0.23,<2",
+]
