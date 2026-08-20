@@ -11,10 +11,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     JGRANTS_FILES_DIR=/tmp/jgrants_files \
     PORT=8000
 
-COPY pyproject.toml uv.lock README.md LICENSE NOTICE ./
+COPY pyproject.toml README.md LICENSE NOTICE ./
 COPY jgrants_mcp_server ./jgrants_mcp_server
 
-RUN uv sync --frozen --no-dev \
+RUN uv sync --no-dev \
     && useradd --create-home --uid 10001 appuser \
     && mkdir -p /tmp/jgrants_files \
     && chown -R appuser:appuser /app /tmp/jgrants_files
